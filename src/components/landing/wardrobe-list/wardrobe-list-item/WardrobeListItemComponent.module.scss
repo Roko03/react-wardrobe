@@ -1,0 +1,70 @@
+@import "../../../../styles/main.scss";
+
+.wardrobe_item {
+  width: 100%;
+  height: fit-content;
+  border-radius: rem(10);
+  overflow: hidden;
+  box-shadow: $box-shadow;
+
+  &__main {
+    height: rem(160);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: rem(24);
+
+    &__image {
+      width: rem(130);
+      height: 100%;
+      max-width: rem(250);
+      object-fit: cover;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &__text {
+      padding: rem(24);
+      padding-left: 0;
+      font-size: rem(18);
+      display: flex;
+      flex-direction: column;
+      gap: rem(16);
+      span {
+        font-weight: 600;
+        padding-right: rem(8);
+      }
+      text-transform: capitalize;
+    }
+  }
+
+  &__info {
+    height: 0;
+    transition: height 0.7s;
+
+    &__text {
+      padding: rem(24);
+      font-size: rem(16);
+      display: flex;
+      flex-direction: column;
+      gap: rem(16);
+
+      span {
+        font-weight: 600;
+        padding-right: rem(8);
+      }
+    }
+  }
+
+  &__info_open {
+    height: rem(120);
+  }
+
+  &__info_close {
+    height: 0;
+  }
+}
