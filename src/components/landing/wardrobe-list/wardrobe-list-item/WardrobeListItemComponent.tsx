@@ -11,8 +11,11 @@ const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
   const [isOpen, setISOpen] = useState<boolean>(false);
 
   return (
-    <div className={styles.wardrobe_item} onClick={() => setISOpen(!isOpen)}>
-      <div className={styles.wardrobe_item__main}>
+    <div className={styles.wardrobe_item}>
+      <div
+        className={styles.wardrobe_item__main}
+        onClick={() => setISOpen(!isOpen)}
+      >
         <div className={styles.wardrobe_item__main__image}>
           <img
             src={
@@ -50,6 +53,21 @@ const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
             {wardrobe.description}
           </p>
         </div>
+      </div>
+      <div className={styles.wardrobe_item__buttons}>
+        <button
+          className={`${styles.wardrobe_item__buttons__button} ${styles.trash}`}
+        >
+          <img src={"/trash.svg"} alt="trash" width={18} height={18} />
+          <span>Trash</span>
+        </button>
+        <button
+          className={`${styles.wardrobe_item__buttons__button} ${styles.pencil}`}
+          onClick={() => console.log("Ej")}
+        >
+          <img src={"/pencil.svg"} alt="pencil" width={18} height={18} />
+          <span>Pencil</span>
+        </button>
       </div>
     </div>
   );

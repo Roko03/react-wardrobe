@@ -6,6 +6,7 @@
   border-radius: rem(10);
   overflow: hidden;
   box-shadow: $box-shadow;
+  position: relative;
 
   &__main {
     height: rem(160);
@@ -67,4 +68,61 @@
   &__info_close {
     height: 0;
   }
+
+  &__buttons {
+    position: absolute;
+    top: 50%;
+    right: rem(16);
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: rem(8);
+
+    .pencil {
+      background-color: orange;
+    }
+
+    .trash {
+      background-color: red;
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(34);
+      height: rem(34);
+      border-radius: 100%;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 378ms cubic-bezier(0.4, 0, 0.2, 1);
+
+      span {
+        pointer-events: none;
+        position: absolute;
+        z-index: 0;
+        top: 120%;
+        opacity: 0;
+        background-color: rgb(42, 53, 71);
+        color: #f8f8f8;
+        font-family: var(--poppins);
+        border-radius: rem(4);
+        padding: rem(8);
+        transition: opacity 378ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+
+    &__button:hover span {
+      pointer-events: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.wardrobe_item:hover .wardrobe_item__buttons__button {
+  visibility: visible;
+  opacity: 1;
 }
