@@ -1,5 +1,6 @@
 import styles from "./ModalComponent.module.scss";
 import DialogComponent from "../dialog/DialogComponent";
+import AddItemForm from "../landing/add-item-form/AddItemForm";
 
 interface ModalComponentProps {
   isModalOpen: boolean;
@@ -12,16 +13,23 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   variant,
   closeDialog,
 }) => {
+  const formVariant = () => {
+    switch (variant) {
+      case "add":
+        return <AddItemForm />;
+      case "delete":
+        return <h1>Delete</h1>;
+      case "edit":
+        return <h1>Edit</h1>;
+      default:
+        return <></>;
+    }
+  };
+
   return (
     <div className={`${styles.modal} ${isModalOpen ? styles.modal_open : ""}`}>
       <DialogComponent closeDialog={closeDialog}>
-        {variant == "add" ? (
-          <h1>Ej kako si</h1>
-        ) : variant == "delete" ? (
-          <h1>Delete</h1>
-        ) : (
-          <h1>Uredi</h1>
-        )}
+        {formVariant()}
       </DialogComponent>
     </div>
   );

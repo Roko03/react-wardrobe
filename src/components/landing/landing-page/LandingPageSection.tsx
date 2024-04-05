@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import WardrobeListComponent from "../wardrobe-list/WardrobeListComponent";
 import styles from "./LandingPageSection.module.scss";
 import getWardrobes from "../../../lib/getWardrobes";
-import DialogComponent from "../../dialog/DialogComponent";
 import ModalComponent from "../../modal/ModalComponent";
 
 const LandingPageSection = () => {
   const [wardrobes, setWardrobes] = useState<WardrobeItem[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
   const [modalType, setModalType] = useState<"add" | "delete" | "edit">("add");
 
   const fetchWardrobeItems = async () => {
