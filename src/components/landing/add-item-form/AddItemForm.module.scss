@@ -2,10 +2,15 @@
 
 .add_form {
   width: 80vw;
+  max-width: rem(700);
   height: 85vh;
   background-color: #f8f8f8;
   border-radius: rem(10);
   padding: rem(24);
+
+  @include breakpoint(medium) {
+    padding: rem(36);
+  }
 
   &__form {
     display: flex;

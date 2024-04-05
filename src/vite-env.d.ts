@@ -8,3 +8,11 @@ type WardrobeItem = {
     picture: string;
     description: string;
 }
+
+type Item = {
+    type: string;
+    size: string;
+    color: string;
+    picture: string;
+    description: string;
+}

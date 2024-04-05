@@ -14,8 +14,6 @@ const DialogComponent: React.FC<DialogComponentProps> = ({
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.body.style.overflowY = "hidden";
-
     const handleOutsideDialog = (event: MouseEvent) => {
       if (
         dialogRef.current &&

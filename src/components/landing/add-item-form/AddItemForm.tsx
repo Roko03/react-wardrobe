@@ -2,6 +2,7 @@ import { z } from "zod";
 import styles from "./AddItemForm.module.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import makeWardrobeItem from "../../../lib/makeWardrobeItem";
 
 const addSchema = z.object({
   type: z.string().min(1, { message: "Odaberite vrstu" }),
@@ -26,10 +27,12 @@ const AddItemForm = () => {
 
   const sizes: string[] = ["XS", "S", "M", "L", "XL", "XXL"];
 
-  const onSubmit = (data: TAddSchema) => {
+  const onSubmit = async (data: TAddSchema) => {
     reset();
 
-    console.log(data);
+    const response = await makeWardrobeItem({ ...data, picture: "/" });
+
+    console.log(response);
   };
 
   return (
@@ -38,6 +41,7 @@ const AddItemForm = () => {
         <label>
           <select {...register("type")}>
             <option value="">Odaberi vrstu</option>
+            <option value="hlace">Hlace</option>
           </select>
           {errors.type && (
             <p
@@ -81,6 +85,7 @@ const AddItemForm = () => {
         <button
           type="submit"
           onClick={handleSubmit(onSubmit)}
+          disabled={isSubmitting}
           className={styles.add_form__form__submit}
         >
           Dodaj

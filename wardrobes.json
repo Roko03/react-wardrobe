@@ -1,32 +1,57 @@
 {
   "wardrobes": [
     {
-      "id": 1,
+      "id": "1",
       "type": "hlace",
       "size": "XS",
       "color": "red",
       "picture": "/",
       "description": "Najbolja majica na svitu"
-    },{
-      "id": 2,
+    },
+    {
+      "id": "2",
       "type": "majica",
       "size": "XS",
       "color": "red",
       "picture": "/",
       "description": "Najbolja majica na svitu"
+    },
+    {
+      "id": "bad4",
+      "type": "hlace",
+      "size": "XS",
+      "color": "crvena",
+      "description": "Najbolje hlace na svijetu",
+      "picture": "/"
+    },
+    {
+      "id": "2b59",
+      "type": "hlace",
+      "size": "XS",
+      "color": "roza",
+      "description": "AFKSAF KAFOSA AWFKJASF",
+      "picture": "/"
+    },
+    {
+      "id": "1520",
+      "type": "hlace",
+      "size": "XS",
+      "color": "afasfasf",
+      "description": "dsgsdgsdg agfas sgsdsg",
+      "picture": "/"
     }
   ],
   "types": [
     {
-      "id": 1,
+      "id": "1",
       "name": "hlace"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "suknja"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "majica"
     }
   ]
