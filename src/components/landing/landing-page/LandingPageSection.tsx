@@ -38,6 +38,7 @@ const LandingPageSection = () => {
       case "add":
         return (
           <AddItemForm
+            fetchWardrobeItems={() => fetchWardrobeItems()}
             wardrobesType={wardrobesType}
             openSuccessSnackBar={() => {
               setIsSnackBarOpen(true);
@@ -90,7 +91,11 @@ const LandingPageSection = () => {
       <SnackBarComponent
         variant={snackBarVariant}
         isSnackBarOpen={isSnackBarOpen}
-        closeSnackBar={() => setIsSnackBarOpen(false)}
+        closeSnackBar={() => {
+          setIsSnackBarOpen(false);
+          setSnackBarMessage(null);
+          setSnackBarVariant(null);
+        }}
         message={snackBarMessage}
       />
     </section>

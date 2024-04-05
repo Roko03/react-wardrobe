@@ -13,6 +13,13 @@
       "size": "XS",
       "color": "red",
       "description": "Najbolja majica na svitu"
+    },
+    {
+      "id": "710a",
+      "type": "majica",
+      "size": "S",
+      "color": "Zelena",
+      "description": "Majica kratkih rukava za okolo kuce"
     }
   ],
   "types": [

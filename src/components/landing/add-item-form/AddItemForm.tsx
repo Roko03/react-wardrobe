@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import makeWardrobeItem from "../../../lib/makeWardrobeItem";
 
 interface AddItemFormProps {
+  fetchWardrobeItems: () => void;
   wardrobesType: WardrobeType[];
   openSuccessSnackBar: () => void;
   openErrorSnackBar: () => void;
@@ -24,6 +25,7 @@ const addSchema = z.object({
 type TAddSchema = z.infer<typeof addSchema>;
 
 const AddItemForm: React.FC<AddItemFormProps> = ({
+  fetchWardrobeItems,
   wardrobesType,
   openSuccessSnackBar,
   openErrorSnackBar,
@@ -48,6 +50,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
     setSnackBarMessage(response.message);
 
     if (response.success) {
+      fetchWardrobeItems();
       closeModal();
       openSuccessSnackBar();
       return;
