@@ -4,6 +4,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import makeWardrobeItem from "../../../lib/makeWardrobeItem";
 
+interface AddItemFormProps {
+  wardrobesType: WardrobeType[];
+}
+
 const addSchema = z.object({
   type: z.string().min(1, { message: "Odaberite vrstu" }),
   size: z.enum(["XS", "S", "M", "L", "XL", "XXL"], {
@@ -15,7 +19,7 @@ const addSchema = z.object({
 
 type TAddSchema = z.infer<typeof addSchema>;
 
-const AddItemForm = () => {
+const AddItemForm: React.FC<AddItemFormProps> = ({ wardrobesType }) => {
   const {
     register,
     handleSubmit,
@@ -32,16 +36,24 @@ const AddItemForm = () => {
 
     const response = await makeWardrobeItem(data);
 
-    console.log(response);
+    if (response.success) {
+      return;
+    }
   };
 
   return (
     <div className={styles.add_form}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.add_form__form}>
         <label>
-          <select {...register("type")}>
+          <select {...register("type")} className={styles.add_form__form__type}>
             <option value="">Odaberi vrstu</option>
-            <option value="hlace">Hlace</option>
+            {wardrobesType.map((type) => {
+              return (
+                <option value={type.name} key={type.id}>
+                  {type.name}
+                </option>
+              );
+            })}
           </select>
           {errors.type && (
             <p

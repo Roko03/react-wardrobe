@@ -37,6 +37,10 @@
       height: rem(160);
     }
 
+    &__type {
+      text-transform: capitalize;
+    }
+
     &__error {
       margin-top: rem(8);
       color: #e00000;
