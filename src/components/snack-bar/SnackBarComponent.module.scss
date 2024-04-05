@@ -1,0 +1,32 @@
+@import "../../styles/main.scss";
+
+.snackbar {
+  position: fixed;
+  bottom: rem(24);
+  left: rem(24);
+  padding: rem(18) rem(36);
+  border-radius: rem(12);
+  visibility: hidden;
+  opacity: 0;
+  z-index: -9;
+  transition: opacity 378ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  font-size: rem(18);
+  cursor: pointer;
+}
+
+.snackbar__error {
+  background-color: #ee0000;
+  color: #f8f8f8;
+}
+
+.snackbar__success {
+  background-color: #4cbb17;
+  color: #f8f8f8;
+}
+
+.snackbar__open {
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+}

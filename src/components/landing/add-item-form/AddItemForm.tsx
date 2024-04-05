@@ -6,6 +6,10 @@ import makeWardrobeItem from "../../../lib/makeWardrobeItem";
 
 interface AddItemFormProps {
   wardrobesType: WardrobeType[];
+  openSuccessSnackBar: () => void;
+  openErrorSnackBar: () => void;
+  setSnackBarMessage: (message: string) => void;
+  closeModal: () => void;
 }
 
 const addSchema = z.object({
@@ -19,7 +23,13 @@ const addSchema = z.object({
 
 type TAddSchema = z.infer<typeof addSchema>;
 
-const AddItemForm: React.FC<AddItemFormProps> = ({ wardrobesType }) => {
+const AddItemForm: React.FC<AddItemFormProps> = ({
+  wardrobesType,
+  openSuccessSnackBar,
+  openErrorSnackBar,
+  setSnackBarMessage,
+  closeModal,
+}) => {
   const {
     register,
     handleSubmit,
@@ -35,10 +45,15 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ wardrobesType }) => {
     reset();
 
     const response = await makeWardrobeItem(data);
+    setSnackBarMessage(response.message);
 
     if (response.success) {
+      closeModal();
+      openSuccessSnackBar();
       return;
     }
+
+    openErrorSnackBar();
   };
 
   return (

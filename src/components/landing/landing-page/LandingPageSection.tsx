@@ -5,12 +5,21 @@ import getWardrobes from "../../../lib/getWardrobes";
 import ModalComponent from "../../modal/ModalComponent";
 import getWardrobesType from "../../../lib/getWardrobesType";
 import AddItemForm from "../add-item-form/AddItemForm";
+import SnackBarComponent from "../../snack-bar/SnackBarComponent";
 
 const LandingPageSection = () => {
   const [wardrobes, setWardrobes] = useState<WardrobeItem[]>([]);
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"add" | "delete" | "edit">("add");
+
   const [wardrobesType, setWardrobesType] = useState<WardrobeType[]>([]);
+
+  const [isSnackBarOpen, setIsSnackBarOpen] = useState<boolean>(false);
+  const [snackBarMessage, setSnackBarMessage] = useState<string | null>(null);
+  const [snackBarVariant, setSnackBarVariant] = useState<
+    "success" | "error" | null
+  >(null);
 
   const fetchWardrobeItems = async () => {
     const response = await getWardrobes();
@@ -27,7 +36,23 @@ const LandingPageSection = () => {
   const formVariant = () => {
     switch (modalType) {
       case "add":
-        return <AddItemForm wardrobesType={wardrobesType} />;
+        return (
+          <AddItemForm
+            wardrobesType={wardrobesType}
+            openSuccessSnackBar={() => {
+              setIsSnackBarOpen(true);
+              setSnackBarVariant("success");
+            }}
+            openErrorSnackBar={() => {
+              setIsSnackBarOpen(true);
+              setSnackBarVariant("error");
+            }}
+            setSnackBarMessage={(message: string) =>
+              setSnackBarMessage(message)
+            }
+            closeModal={() => setIsModalOpen(false)}
+          />
+        );
       case "delete":
         return <h1>Delete</h1>;
       case "edit":
@@ -62,6 +87,12 @@ const LandingPageSection = () => {
       >
         {formVariant()}
       </ModalComponent>
+      <SnackBarComponent
+        variant={snackBarVariant}
+        isSnackBarOpen={isSnackBarOpen}
+        closeSnackBar={() => setIsSnackBarOpen(false)}
+        message={snackBarMessage}
+      />
     </section>
   );
 };

@@ -10,9 +10,9 @@ export default async function makeWardrobeItem(data: Item) {
         body: JSON.stringify(data)
     })
 
-    if (!response.ok) throw new Error("Can't create wardrobe item")
+    if (!response.ok) return { success: false, message: "Ne možete dodati novi proizvod u garderobu" }
 
     const item = await response.json();
 
-    return { success: true, item: item }
+    return { success: true, message: "Uspješno ste dodali novi proizvod", item: item }
 }
