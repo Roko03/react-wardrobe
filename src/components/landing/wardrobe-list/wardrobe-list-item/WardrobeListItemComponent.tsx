@@ -59,14 +59,14 @@ const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
           className={`${styles.wardrobe_item__buttons__button} ${styles.trash}`}
         >
           <img src={"/trash.svg"} alt="trash" width={18} height={18} />
-          <span>Trash</span>
+          <span>Izbriši</span>
         </button>
         <button
           className={`${styles.wardrobe_item__buttons__button} ${styles.pencil}`}
           onClick={() => console.log("Ej")}
         >
           <img src={"/pencil.svg"} alt="pencil" width={18} height={18} />
-          <span>Pencil</span>
+          <span>Uredi</span>
         </button>
       </div>
     </div>
