@@ -27,16 +27,10 @@ const LandingPageSection = () => {
           setModalType("add");
           setIsModalOpen(true);
         }}
+        className={styles.landing_section__add}
       >
-        Dodaj
-      </button>
-      <button
-        onClick={() => {
-          setModalType("delete");
-          setIsModalOpen(true);
-        }}
-      >
-        Izbrisi
+        <img src={"/plus.svg"} alt="plus" height={18} width={18} />
+        <p>Dodaj proizvod u garderobu</p>
       </button>
       <WardrobeListComponent wardrobes={wardrobes} />
       <ModalComponent

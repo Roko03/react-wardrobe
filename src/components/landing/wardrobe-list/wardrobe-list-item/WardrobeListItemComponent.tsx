@@ -17,12 +17,7 @@ const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
         onClick={() => setISOpen(!isOpen)}
       >
         <div className={styles.wardrobe_item__main__image}>
-          <img
-            src={
-              "https://images.unsplash.com/photo-1711861413115-797ee0655214?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            alt={wardrobe.type}
-          />
+          <img src={`/${wardrobe.type}.png`} alt={wardrobe.type} />
         </div>
         <div className={styles.wardrobe_item__main__text}>
           <p>

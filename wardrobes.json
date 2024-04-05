@@ -5,7 +5,6 @@
       "type": "hlace",
       "size": "XS",
       "color": "red",
-      "picture": "/",
       "description": "Najbolja majica na svitu"
     },
     {
@@ -13,7 +12,6 @@
       "type": "majica",
       "size": "XS",
       "color": "red",
-      "picture": "/",
       "description": "Najbolja majica na svitu"
     },
     {
@@ -21,24 +19,21 @@
       "type": "hlace",
       "size": "XS",
       "color": "crvena",
-      "description": "Najbolje hlace na svijetu",
-      "picture": "/"
+      "description": "Najbolje hlace na svijetu"
     },
     {
       "id": "2b59",
       "type": "hlace",
       "size": "XS",
       "color": "roza",
-      "description": "AFKSAF KAFOSA AWFKJASF",
-      "picture": "/"
+      "description": "AFKSAF KAFOSA AWFKJASF"
     },
     {
       "id": "1520",
       "type": "hlace",
       "size": "XS",
       "color": "afasfasf",
-      "description": "dsgsdgsdg agfas sgsdsg",
-      "picture": "/"
+      "description": "dsgsdgsdg agfas sgsdsg"
     }
   ],
   "types": [

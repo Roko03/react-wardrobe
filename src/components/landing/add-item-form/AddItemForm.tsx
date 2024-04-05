@@ -30,7 +30,7 @@ const AddItemForm = () => {
   const onSubmit = async (data: TAddSchema) => {
     reset();
 
-    const response = await makeWardrobeItem({ ...data, picture: "/" });
+    const response = await makeWardrobeItem(data);
 
     console.log(response);
   };
