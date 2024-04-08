@@ -3,10 +3,12 @@ import styles from "./WardrobeListItemComponent.module.scss";
 
 interface WardrobeListItemComponentProps {
   wardrobe: WardrobeItem;
+  deleteFunction: (id: string) => void;
 }
 
 const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
   wardrobe,
+  deleteFunction,
 }) => {
   const [isOpen, setISOpen] = useState<boolean>(false);
 
@@ -52,6 +54,7 @@ const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
       <div className={styles.wardrobe_item__buttons}>
         <button
           className={`${styles.wardrobe_item__buttons__button} ${styles.trash}`}
+          onClick={() => deleteFunction(wardrobe.id)}
         >
           <img src={"/trash.svg"} alt="trash" width={18} height={18} />
           <span>Izbriši</span>

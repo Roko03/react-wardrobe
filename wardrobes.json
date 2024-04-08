@@ -1,27 +1,5 @@
 {
-  "wardrobes": [
-    {
-      "id": "1",
-      "type": "hlace",
-      "size": "XS",
-      "color": "red",
-      "description": "Najbolja majica na svitu"
-    },
-    {
-      "id": "2",
-      "type": "majica",
-      "size": "XS",
-      "color": "red",
-      "description": "Najbolja majica na svitu"
-    },
-    {
-      "id": "710a",
-      "type": "majica",
-      "size": "S",
-      "color": "Zelena",
-      "description": "Majica kratkih rukava za okolo kuce"
-    }
-  ],
+  "wardrobes": [],
   "types": [
     {
       "id": "1",

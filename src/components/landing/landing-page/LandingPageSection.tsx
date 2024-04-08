@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import WardrobeListComponent from "../wardrobe-list/WardrobeListComponent";
 import styles from "./LandingPageSection.module.scss";
 import getWardrobes from "../../../lib/getWardrobes";
@@ -6,20 +6,23 @@ import ModalComponent from "../../modal/ModalComponent";
 import getWardrobesType from "../../../lib/getWardrobesType";
 import AddItemForm from "../add-item-form/AddItemForm";
 import SnackBarComponent from "../../snack-bar/SnackBarComponent";
+import DeleteItemForm from "../delete-item-form/DeleteItemForm";
+import deleteWardrobeItem from "../../../lib/deleteWardrobeItem";
 
 const LandingPageSection = () => {
   const [wardrobes, setWardrobes] = useState<WardrobeItem[]>([]);
+  const [wardrobesType, setWardrobesType] = useState<WardrobeType[]>([]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"add" | "delete" | "edit">("add");
-
-  const [wardrobesType, setWardrobesType] = useState<WardrobeType[]>([]);
 
   const [isSnackBarOpen, setIsSnackBarOpen] = useState<boolean>(false);
   const [snackBarMessage, setSnackBarMessage] = useState<string | null>(null);
   const [snackBarVariant, setSnackBarVariant] = useState<
     "success" | "error" | null
   >(null);
+
+  const [itemId, setItemId] = useState<string>("");
 
   const fetchWardrobeItems = async () => {
     const response = await getWardrobes();
@@ -33,7 +36,24 @@ const LandingPageSection = () => {
     setWardrobesType(response);
   };
 
-  const formVariant = () => {
+  const deleteItemFunction = async () => {
+    const response = await deleteWardrobeItem(itemId);
+
+    setSnackBarMessage(response.message);
+
+    if (response.success) {
+      fetchWardrobeItems();
+      setIsModalOpen(false);
+      setIsSnackBarOpen(true);
+      setSnackBarVariant("success");
+      return;
+    }
+
+    setIsSnackBarOpen(true);
+    setSnackBarVariant("error");
+  };
+
+  const formVariant = useMemo(() => {
     switch (modalType) {
       case "add":
         return (
@@ -55,13 +75,13 @@ const LandingPageSection = () => {
           />
         );
       case "delete":
-        return <h1>Delete</h1>;
+        return <DeleteItemForm deleteItem={() => deleteItemFunction()} />;
       case "edit":
         return <h1>Edit</h1>;
       default:
         return <></>;
     }
-  };
+  }, [wardrobesType, modalType]);
 
   useEffect(() => {
     fetchWardrobeItems();
@@ -81,12 +101,19 @@ const LandingPageSection = () => {
         <img src={"/plus.svg"} alt="plus" height={18} width={18} />
         <p>Dodaj proizvod u garderobu</p>
       </button>
-      <WardrobeListComponent wardrobes={wardrobes} />
+      <WardrobeListComponent
+        wardrobes={wardrobes}
+        deleteFunction={(id: string) => {
+          setModalType("delete");
+          setIsModalOpen(!isModalOpen);
+          setItemId(id);
+        }}
+      />
       <ModalComponent
         isModalOpen={isModalOpen}
         closeDialog={() => setIsModalOpen(false)}
       >
-        {formVariant()}
+        {formVariant}
       </ModalComponent>
       <SnackBarComponent
         variant={snackBarVariant}
