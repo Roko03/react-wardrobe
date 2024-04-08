@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./WardrobeListComponent.module.scss";
 import WardrobeListItemComponent from "./wardrobe-list-item/WardrobeListItemComponent";
 
@@ -12,6 +13,8 @@ const WardrobeListComponent: React.FC<WardrobeListComponentProps> = ({
   deleteFunction,
   editFunction,
 }) => {
+  const [isListItemOpen, setIsListItemOpen] = useState<string>("");
+
   return (
     <div className={styles.wardrobe_list}>
       {wardrobes.map((wardrobe) => {
@@ -21,6 +24,8 @@ const WardrobeListComponent: React.FC<WardrobeListComponentProps> = ({
             key={wardrobe.id}
             deleteFunction={(id: string) => deleteFunction(id)}
             editFunction={(id: string) => editFunction(id)}
+            isListItemOpen={isListItemOpen}
+            setIsListItemOpen={(data: string) => setIsListItemOpen(data)}
           />
         );
       })}

@@ -1,24 +1,31 @@
-import { useState } from "react";
 import styles from "./WardrobeListItemComponent.module.scss";
 
 interface WardrobeListItemComponentProps {
   wardrobe: WardrobeItem;
   deleteFunction: (id: string) => void;
   editFunction: (id: string) => void;
+  isListItemOpen: string;
+  setIsListItemOpen: (data: string) => void;
 }
 
 const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
   wardrobe,
   deleteFunction,
   editFunction,
+  isListItemOpen,
+  setIsListItemOpen,
 }) => {
-  const [isOpen, setISOpen] = useState<boolean>(false);
-
   return (
     <div className={styles.wardrobe_item}>
       <div
         className={styles.wardrobe_item__main}
-        onClick={() => setISOpen(!isOpen)}
+        onClick={() => {
+          if (isListItemOpen == wardrobe.id) {
+            setIsListItemOpen("");
+          } else {
+            setIsListItemOpen(wardrobe.id);
+          }
+        }}
       >
         <div className={styles.wardrobe_item__main__image}>
           <img src={`/${wardrobe.type}.png`} alt={wardrobe.type} />
@@ -37,7 +44,7 @@ const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
       </div>
       <div
         className={`${styles.wardrobe_item__info} ${
-          isOpen
+          isListItemOpen == wardrobe.id
             ? styles.wardrobe_item__info_open
             : styles.wardrobe_item__info_close
         }`}
