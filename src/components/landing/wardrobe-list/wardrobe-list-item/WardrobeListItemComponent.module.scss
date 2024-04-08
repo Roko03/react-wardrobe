@@ -2,7 +2,7 @@
 
 .wardrobe_item {
   width: 100%;
-  height: fit-content;
+  // height: fit-content;
   border-radius: rem(10);
   overflow: hidden;
   box-shadow: $box-shadow;
@@ -44,8 +44,7 @@
   }
 
   &__info {
-    height: 0;
-    transition: height 0.7s;
+    max-height: 0;
 
     &__text {
       padding: rem(24);
@@ -62,11 +61,13 @@
   }
 
   &__info_open {
-    height: rem(120);
+    transition: all 1s ease-in-out;
+    max-height: rem(300);
   }
 
   &__info_close {
-    height: 0;
+    transition: all 0.6s ease;
+    max-height: 0;
   }
 
   &__buttons {
