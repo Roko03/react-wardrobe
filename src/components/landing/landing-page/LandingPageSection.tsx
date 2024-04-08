@@ -12,6 +12,7 @@ import EditItemForm from "../edit-item-form/EditItemForm";
 import editWardrobeItem from "../../../lib/editWardrobeItem";
 import getWardrobeItemById from "../../../lib/getWardrobeItemById";
 import WardrobeFilterListComponents from "../wardrobe-filter/WardrobeFilterListComponents";
+import CircularProgressbComponent from "../../circular-progress/CircularProgressbComponent";
 
 const LandingPageSection = () => {
   const [wardrobes, setWardrobes] = useState<WardrobeItem[]>([]);
@@ -32,11 +33,15 @@ const LandingPageSection = () => {
   const [clickedFilterElement, setClickedFilterElement] =
     useState<string>("all");
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const fetchWardrobeItems = async () => {
+    setIsLoading(true);
     const response = await getWardrobes();
 
     setClickedFilterElement("all");
     setWardrobes(response);
+    setIsLoading(false);
   };
 
   const fetchWardrobesType = async () => {
@@ -89,6 +94,7 @@ const LandingPageSection = () => {
 
   const filterWardrobesItems = async (type: string) => {
     setClickedFilterElement(type);
+    setIsLoading(true);
 
     const fetchedData: WardrobeItem[] = await getWardrobes();
 
@@ -100,6 +106,8 @@ const LandingPageSection = () => {
     } else {
       setWardrobes(fetchedData);
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -168,19 +176,23 @@ const LandingPageSection = () => {
         clickedFilterElement={clickedFilterElement}
         filterWardrobesItems={(data: string) => filterWardrobesItems(data)}
       />
-      <WardrobeListComponent
-        wardrobes={wardrobes}
-        deleteFunction={(id: string) => {
-          setModalType("delete");
-          setIsModalOpen(!isModalOpen);
-          setItemId(id);
-        }}
-        editFunction={(id: string) => {
-          setModalType("edit");
-          setIsModalOpen(!isModalOpen);
-          setItemId(id);
-        }}
-      />
+      {isLoading ? (
+        <CircularProgressbComponent />
+      ) : (
+        <WardrobeListComponent
+          wardrobes={wardrobes}
+          deleteFunction={(id: string) => {
+            setModalType("delete");
+            setIsModalOpen(!isModalOpen);
+            setItemId(id);
+          }}
+          editFunction={(id: string) => {
+            setModalType("edit");
+            setIsModalOpen(!isModalOpen);
+            setItemId(id);
+          }}
+        />
+      )}
       <ModalComponent
         isModalOpen={isModalOpen}
         closeDialog={() => setIsModalOpen(false)}
