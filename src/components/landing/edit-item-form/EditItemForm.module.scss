@@ -1,0 +1,64 @@
+@import "../../../styles/main.scss";
+
+.edit_form {
+  width: 80vw;
+  max-width: rem(700);
+  height: 85vh;
+  background-color: #f8f8f8;
+  border-radius: rem(10);
+  padding: rem(24);
+
+  @include breakpoint(medium) {
+    padding: rem(36);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    gap: rem(16);
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: none;
+      outline: none;
+      border: 1px solid rgba(#010101, 0.2);
+      border-radius: rem(4);
+      font-family: var(--poppins);
+      font-size: rem(16);
+      padding: rem(10);
+    }
+
+    textarea {
+      resize: none;
+      height: rem(160);
+    }
+
+    &__type {
+      text-transform: capitalize;
+    }
+
+    &__error {
+      margin-top: rem(8);
+      color: #e00000;
+    }
+
+    &__submit {
+      margin-top: auto;
+      padding: rem(16) rem(42);
+      font-size: rem(18);
+      align-self: center;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #f8f8f8;
+      background-color: #4cbb17;
+      border: none;
+      outline: none;
+      border-radius: rem(10);
+      cursor: pointer;
+    }
+  }
+}

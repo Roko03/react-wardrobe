@@ -8,6 +8,9 @@ import AddItemForm from "../add-item-form/AddItemForm";
 import SnackBarComponent from "../../snack-bar/SnackBarComponent";
 import DeleteItemForm from "../delete-item-form/DeleteItemForm";
 import deleteWardrobeItem from "../../../lib/deleteWardrobeItem";
+import EditItemForm from "../edit-item-form/EditItemForm";
+import editWardrobeItem from "../../../lib/editWardrobeItem";
+import getWardrobeItemById from "../../../lib/getWardrobeItemById";
 
 const LandingPageSection = () => {
   const [wardrobes, setWardrobes] = useState<WardrobeItem[]>([]);
@@ -23,6 +26,7 @@ const LandingPageSection = () => {
   >(null);
 
   const [itemId, setItemId] = useState<string>("");
+  const [itemIdData, setItemIdData] = useState<Item | null>(null);
 
   const fetchWardrobeItems = async () => {
     const response = await getWardrobes();
@@ -34,6 +38,11 @@ const LandingPageSection = () => {
     const response = await getWardrobesType();
 
     setWardrobesType(response);
+  };
+
+  const fetchWardrobeItemById = async () => {
+    const response = await getWardrobeItemById(itemId);
+    setItemIdData(response.data);
   };
 
   const deleteItemFunction = async () => {
@@ -52,6 +61,32 @@ const LandingPageSection = () => {
     setIsSnackBarOpen(true);
     setSnackBarVariant("error");
   };
+
+  const editItemFunction = async (data: Item) => {
+    const response = await editWardrobeItem(data, itemId);
+
+    setSnackBarMessage(response.message);
+
+    if (response.success) {
+      fetchWardrobeItems();
+      setIsModalOpen(false);
+      setIsSnackBarOpen(true);
+      setSnackBarVariant("success");
+      return;
+    }
+
+    setIsSnackBarOpen(true);
+    setSnackBarVariant("error");
+  };
+
+  useEffect(() => {
+    fetchWardrobeItems();
+    fetchWardrobesType();
+  }, []);
+
+  useEffect(() => {
+    if (itemId) fetchWardrobeItemById();
+  }, [itemId]);
 
   const formVariant = useMemo(() => {
     switch (modalType) {
@@ -77,16 +112,19 @@ const LandingPageSection = () => {
       case "delete":
         return <DeleteItemForm deleteItem={() => deleteItemFunction()} />;
       case "edit":
-        return <h1>Edit</h1>;
+        return itemIdData != null ? (
+          <EditItemForm
+            itemIdData={itemIdData}
+            wardrobesType={wardrobesType}
+            editItem={(data: Item) => editItemFunction(data)}
+          />
+        ) : (
+          <div></div>
+        );
       default:
         return <></>;
     }
-  }, [wardrobesType, modalType]);
-
-  useEffect(() => {
-    fetchWardrobeItems();
-    fetchWardrobesType();
-  }, []);
+  }, [wardrobesType, modalType, itemIdData]);
 
   return (
     <section className={styles.landing_section}>
@@ -105,6 +143,11 @@ const LandingPageSection = () => {
         wardrobes={wardrobes}
         deleteFunction={(id: string) => {
           setModalType("delete");
+          setIsModalOpen(!isModalOpen);
+          setItemId(id);
+        }}
+        editFunction={(id: string) => {
+          setModalType("edit");
           setIsModalOpen(!isModalOpen);
           setItemId(id);
         }}

@@ -4,11 +4,13 @@ import styles from "./WardrobeListItemComponent.module.scss";
 interface WardrobeListItemComponentProps {
   wardrobe: WardrobeItem;
   deleteFunction: (id: string) => void;
+  editFunction: (id: string) => void;
 }
 
 const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
   wardrobe,
   deleteFunction,
+  editFunction,
 }) => {
   const [isOpen, setISOpen] = useState<boolean>(false);
 
@@ -61,7 +63,7 @@ const WardrobeListItemComponent: React.FC<WardrobeListItemComponentProps> = ({
         </button>
         <button
           className={`${styles.wardrobe_item__buttons__button} ${styles.pencil}`}
-          onClick={() => console.log("Ej")}
+          onClick={() => editFunction(wardrobe.id)}
         >
           <img src={"/pencil.svg"} alt="pencil" width={18} height={18} />
           <span>Uredi</span>
