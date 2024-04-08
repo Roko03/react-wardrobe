@@ -1,0 +1,21 @@
+@import "../../../styles/main.scss";
+
+.filter_list {
+  display: flex;
+  flex-direction: row;
+  gap: rem(24);
+  text-transform: capitalize;
+  flex-wrap: wrap;
+  margin: rem(24) 0;
+  font-size: rem(21);
+
+  li {
+    font-size: rem(18);
+    cursor: pointer;
+  }
+
+  &__active {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+}

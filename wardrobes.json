@@ -1,18 +1,11 @@
 {
   "wardrobes": [
     {
-      "id": "27c2",
+      "id": "580a",
       "type": "hlace",
-      "size": "XS",
-      "color": "roza",
-      "description": "Najbolje gace na svitu"
-    },
-    {
-      "id": "1c38",
-      "type": "majica",
-      "size": "XXL",
-      "color": "plava",
-      "description": "afasfasfas asvasf"
+      "size": "S",
+      "color": "crvena",
+      "description": "Najbolje hlace velicine S"
     }
   ],
   "types": [

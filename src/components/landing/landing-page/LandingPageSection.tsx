@@ -11,6 +11,7 @@ import deleteWardrobeItem from "../../../lib/deleteWardrobeItem";
 import EditItemForm from "../edit-item-form/EditItemForm";
 import editWardrobeItem from "../../../lib/editWardrobeItem";
 import getWardrobeItemById from "../../../lib/getWardrobeItemById";
+import WardrobeFilterListComponents from "../wardrobe-filter/WardrobeFilterListComponents";
 
 const LandingPageSection = () => {
   const [wardrobes, setWardrobes] = useState<WardrobeItem[]>([]);
@@ -28,9 +29,13 @@ const LandingPageSection = () => {
   const [itemId, setItemId] = useState<string>("");
   const [itemIdData, setItemIdData] = useState<Item | null>(null);
 
+  const [clickedFilterElement, setClickedFilterElement] =
+    useState<string>("all");
+
   const fetchWardrobeItems = async () => {
     const response = await getWardrobes();
 
+    setClickedFilterElement("all");
     setWardrobes(response);
   };
 
@@ -42,6 +47,7 @@ const LandingPageSection = () => {
 
   const fetchWardrobeItemById = async () => {
     const response = await getWardrobeItemById(itemId);
+
     setItemIdData(response.data);
   };
 
@@ -52,6 +58,7 @@ const LandingPageSection = () => {
 
     if (response.success) {
       fetchWardrobeItems();
+      setClickedFilterElement("all");
       setIsModalOpen(false);
       setIsSnackBarOpen(true);
       setSnackBarVariant("success");
@@ -69,6 +76,7 @@ const LandingPageSection = () => {
 
     if (response.success) {
       fetchWardrobeItems();
+      setClickedFilterElement("all");
       setIsModalOpen(false);
       setIsSnackBarOpen(true);
       setSnackBarVariant("success");
@@ -77,6 +85,21 @@ const LandingPageSection = () => {
 
     setIsSnackBarOpen(true);
     setSnackBarVariant("error");
+  };
+
+  const filterWardrobesItems = async (type: string) => {
+    setClickedFilterElement(type);
+
+    const fetchedData: WardrobeItem[] = await getWardrobes();
+
+    if (type != "all") {
+      const arr = fetchedData.filter((item) => {
+        return item.type == type;
+      });
+      setWardrobes(arr);
+    } else {
+      setWardrobes(fetchedData);
+    }
   };
 
   useEffect(() => {
@@ -139,6 +162,12 @@ const LandingPageSection = () => {
         <img src={"/plus.svg"} alt="plus" height={18} width={18} />
         <p>Dodaj proizvod u garderobu</p>
       </button>
+
+      <WardrobeFilterListComponents
+        wardrobesType={wardrobesType}
+        clickedFilterElement={clickedFilterElement}
+        filterWardrobesItems={(data: string) => filterWardrobesItems(data)}
+      />
       <WardrobeListComponent
         wardrobes={wardrobes}
         deleteFunction={(id: string) => {
