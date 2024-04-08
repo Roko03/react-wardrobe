@@ -1,0 +1,32 @@
+{
+  "wardrobes": [
+    {
+      "id": "580a",
+      "type": "hlace",
+      "size": "S",
+      "color": "crvena",
+      "description": "Najbolje hlace velicine S"
+    },
+    {
+      "id": "c518",
+      "type": "hlace",
+      "size": "XS",
+      "color": "Crvena",
+      "description": "Najbolje crvene hlace"
+    }
+  ],
+  "types": [
+    {
+      "id": "1",
+      "name": "hlace"
+    },
+    {
+      "id": "2",
+      "name": "suknja"
+    },
+    {
+      "id": "3",
+      "name": "majica"
+    }
+  ]
+}

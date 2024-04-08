@@ -1,0 +1,8 @@
+@import "../../../styles/main.scss";
+
+.wardrobe_list {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+  margin-top: rem(24);
+}
